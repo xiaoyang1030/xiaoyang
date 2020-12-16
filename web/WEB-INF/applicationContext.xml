@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <!--  设置注解扫描路径 只能扫service  @Service -->
+    <context:component-scan base-package="com.bjpowernode.model.service"/>
+    <!--事务管理:transactionManager-->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <!--简化配置-->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <!--切点配置
+            完成消息应用在哪些方法上
+            expression：表达式
+            execution进行查找
+            execution(就是描述方法)
+            方法要素:
+              访问修饰符
+              返回值类型
+              方法名
+              参数列表
+              （* com.sample.service.impl .. *.*（..））
+              execution(* com.bjpowernode.AOP01..*.sale*(..))
+              execution(* *.*(..))
+              第一个*:表示返回值的类型任意,表示访问修饰符
+              第一个..:表示当前包及子包
+              第二个*:类名
+              第三个*:方法名
+              第二个..:方法参数是任意类型
+        -->
+    <!--<aop:config>-->
+        <!--<aop:pointcut id="" expression="execution(*)"/>-->
+        <!--<aop:aspect id="" ref="">-->
+            <!--<aop:before method="www" pointcut-ref=""/>-->
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
+</beans>

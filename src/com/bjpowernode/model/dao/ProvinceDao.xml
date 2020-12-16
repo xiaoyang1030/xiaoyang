@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjpowernode.model.dao.ProvinceDao">
+  <resultMap id="BaseResultMap" type="com.bjpowernode.entity.Province">
+    <id column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pid, pname
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from province
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from province
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from province
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="pid" keyProperty="pid" parameterType="com.bjpowernode.entity.Province" useGeneratedKeys="true">
+    insert into province (pname)
+    values (#{pname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="pid" keyProperty="pid" parameterType="com.bjpowernode.entity.Province" useGeneratedKeys="true">
+    insert into province
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pname != null">
+        pname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pname != null">
+        #{pname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bjpowernode.entity.Province">
+    update province
+    <set>
+      <if test="pname != null">
+        pname = #{pname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bjpowernode.entity.Province">
+    update province
+    set pname = #{pname,jdbcType=VARCHAR}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+</mapper>
