@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PersistentConfig">
+    <option name="historyConfigList">
+      <map>
+        <entry key="province">
+          <value>
+            <Config>
+              <option name="comment" value="true" />
+              <option name="daoMvnPath" value="src" />
+              <option name="daoName" value="ProvinceDao" />
+              <option name="daoPackage" value="com.bjpowernode.model.dao" />
+              <option name="daoPostfix" value="Dao" />
+              <option name="modelMvnPath" value="src" />
+              <option name="modelName" value="Province" />
+              <option name="modelPackage" value="com.bjpowernode.entity" />
+              <option name="name" value="province" />
+              <option name="overrideJava" value="true" />
+              <option name="overrideXML" value="true" />
+              <option name="primaryKey" value="pid" />
+              <option name="projectFolder" value="$PROJECT_DIR$" />
+              <option name="tableName" value="province" />
+              <option name="useSchemaPrefix" value="true" />
+              <option name="xmlMvnPath" value="src" />
+              <option name="xmlPackage" value="com.bjpowernode.model.dao" />
+            </Config>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
