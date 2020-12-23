@@ -1,5 +1,6 @@
 package com.bjpowernode.crm.workBench.bean;
 
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
@@ -7,6 +8,7 @@ import java.io.Serializable;
  * @author 
  */
 public class ActivityRemark implements Serializable {
+    @Id
     private String id;
 
     private String notecontent;

@@ -3,6 +3,7 @@ package com.bjpowernode.crm.workBench.service.impl;
 import com.bjpowernode.crm.base.constants.CrmExceptionEnum;
 import com.bjpowernode.crm.base.exception.CrmException;
 import com.bjpowernode.crm.base.util.DateTimeUtil;
+import com.bjpowernode.crm.base.util.MD5Util;
 import com.bjpowernode.crm.base.util.UUIDUtil;
 import com.bjpowernode.crm.settings.bean.User;
 import com.bjpowernode.crm.settings.mapper.UserDao;
@@ -63,9 +64,9 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public Activity selectById(String id) {
         Activity activity = activityDao.selectById(id);
-        User user=userDao.selectByPrimaryKey(activity.getOwner());
+        User user = userDao.selectByPrimaryKey(activity.getOwner());
         activity.setOwner(user.getName());
-        List<ActivityRemark> activityRemarks=activityRemarkDao.selectByActivityId(id);
+        List<ActivityRemark> activityRemarks = activityRemarkDao.selectByActivityId(id);
         activity.setActivityRemark(activityRemarks);
         return activity;
     }
@@ -73,8 +74,36 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public void delActivityBeizhu(String id) {
         int i = activityRemarkDao.deleteByPrimaryKey(id);
-        if(i==0){
-          throw new CrmException(CrmExceptionEnum.ACTIVITY_BEIZHUDELETE);
+        if (i == 0) {
+            throw new CrmException(CrmExceptionEnum.ACTIVITY_BEIZHUDELETE);
+        }
+    }
+
+    @Override
+    public ActivityRemark queryByRemarkId(String id) {
+        return activityRemarkDao.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public void updateEditRemark(ActivityRemark activityRemark) {
+        activityRemark.setEdittime(DateTimeUtil.getSysTime());
+        activityRemark.setEditflag("1");
+        int i = activityRemarkDao.updateByPrimaryKeySelective(activityRemark);
+        if (i == 0) {
+            throw new CrmException(CrmExceptionEnum.ACTIVITY_EDITBEIZHU);
+        }
+    }
+
+    @Override
+    public ActivityRemark createEditRemark(ActivityRemark activityRemark) {
+        activityRemark.setId(UUIDUtil.getUUID());
+        activityRemark.setCreatetime(DateTimeUtil.getSysTime());
+        activityRemark.setEditflag("0");
+        int i = activityRemarkDao.insertSelective(activityRemark);
+        if (i == 0) {
+            throw new CrmException(CrmExceptionEnum.ACTIVITY_CREATEBEIZHU);
+        } else {
+            return activityRemark;
         }
     }
 

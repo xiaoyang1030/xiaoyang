@@ -12,4 +12,5 @@ public interface UserService {
 
     List<User> queryAll();
 
+    void fileUpload(User user);
 }

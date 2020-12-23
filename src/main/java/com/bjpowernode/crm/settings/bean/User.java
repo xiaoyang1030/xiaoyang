@@ -29,6 +29,7 @@ public class User implements Serializable {
     private String createBy;
     private String editTime;
     private String editBy;
+    private String photo;
 
     @Override
     public String toString() {
@@ -46,13 +47,22 @@ public class User implements Serializable {
                 ", createBy='" + createBy + '\'' +
                 ", editTime='" + editTime + '\'' +
                 ", editBy='" + editBy + '\'' +
+                ", photo='" + photo + '\'' +
                 '}';
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public User() {
     }
 
-    public User(String id, String loginAct, String name, String loginPwd, String email, String expireTime, String lockState, String deptno, String allowIps, String createTime, String createBy, String editTime, String editBy) {
+    public User(String id, String loginAct, String name, String loginPwd, String email, String expireTime, String lockState, String deptno, String allowIps, String createTime, String createBy, String editTime, String editBy, String photo) {
         this.id = id;
         this.loginAct = loginAct;
         this.name = name;
@@ -66,7 +76,9 @@ public class User implements Serializable {
         this.createBy = createBy;
         this.editTime = editTime;
         this.editBy = editBy;
+        this.photo = photo;
     }
+
 
     public String getId() {
         return id;

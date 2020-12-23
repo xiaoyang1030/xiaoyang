@@ -54,5 +54,13 @@ public class UserServiceImpl implements UserService {
         return userDao.selectAll();
     }
 
+    @Override
+    public void fileUpload(User user) {
+        int i = userDao.updateByPrimaryKeySelective(user);
+        if(i==0){
+            throw new CrmException(CrmExceptionEnum.FILEUPLOAD_EXCEPTION);
+        }
+    }
+
 
 }

@@ -97,7 +97,29 @@
 			</div>
 		</div>
 	</div>
-	
+
+	<%--上传头像模态窗口--%>
+	<div class="modal fade" tabindex="-1" role="dialog" id="uploadModal">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">上传头像</h4>
+				</div>
+				<form action="/crm/settings/user/fileUpload" method="post" enctype="multipart/form-data">
+					<div class="modal-body">
+						<div class="form-group">
+							<input type="file" name="photo">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default">关闭</button>
+							<button type="submit" class="btn btn-primary">上传</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 	<!-- 顶部 -->
 	<div id="top" style="height: 50px; background-color: #3C3C3C; width: 100%;">
 		<div style="position: absolute; top: 5px; left: 0px; font-size: 30px; font-weight: 400; color: white; font-family: 'times new roman'">CRM &nbsp;<span style="font-size: 12px;">&copy;2017&nbsp;动力节点</span></div>
@@ -111,6 +133,7 @@
 						<li><a href="../workbench/index.jsp"><span class="glyphicon glyphicon-home"></span> 工作台</a></li>
 						<li><a href="../settings/index.html"><span class="glyphicon glyphicon-wrench"></span> 系统设置</a></li>
 						<li><a href="javascript:void(0)" data-toggle="modal" data-target="#myInformation"><span class="glyphicon glyphicon-file"></span> 我的资料</a></li>
+						<li><a href="javascript:void(0)" data-toggle="modal" data-target="#uploadModal"><span class="glyphicon "></span> 上传头像</a></li>
 						<li><a href="javascript:void(0)" data-toggle="modal" data-target="#editPwdModal"><span class="glyphicon glyphicon-edit"></span> 修改密码</a></li>
 						<li><a href="javascript:void(0);" data-toggle="modal" data-target="#exitModal"><span class="glyphicon glyphicon-off"></span> 退出</a></li>
 					</ul>

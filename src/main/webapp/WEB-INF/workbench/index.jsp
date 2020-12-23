@@ -131,6 +131,28 @@
 			</div>
 		</div>
 	</div>
+	<%--上传头像模态窗口--%>
+	<div class="modal fade" tabindex="-1" role="dialog" id="uploadModal">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">退出</span></button>
+					<h4 class="modal-title">上传头像</h4>
+				</div>
+				<form action="${pageContext.request.contextPath}/fileUpload" method="post" enctype="multipart/form-data">
+					<div class="modal-body">
+						<div class="form-group">
+							<input type="file" name="photo">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" >关闭</button>
+							<button type="submit" class="btn btn-primary">上传</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 	
 	<!-- 顶部 -->
 	<div id="top" style="height: 50px; background-color: #3C3C3C; width: 100%;">
@@ -139,11 +161,13 @@
 			<ul>
 				<li class="dropdown user-dropdown">
 					<a href="javascript:void(0)" style="text-decoration: none; color: white;" class="dropdown-toggle" data-toggle="dropdown">
-						<span class="glyphicon glyphicon-user"></span> ${sessionScope.user.name} <span class="caret"></span>
+						<img title="zhangsan" src="${sessionScope.user.photo}"
+							 style="width: 30px; height:30px;"></span> ${sessionScope.user.name} <span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="../settings/index.html"><span class="glyphicon glyphicon-wrench"></span> 系统设置</a></li>
 						<li><a href="javascript:void(0)" data-toggle="modal" data-target="#myInformation"><span class="glyphicon glyphicon-file"></span> 我的资料</a></li>
+						<li><a href="javascript:void(0)" data-toggle="modal" data-target="#uploadModal"><span class="glyphicon glyphicon-upload"></span> 上传头像</a></li>
 						<li><a href="javascript:void(0)" data-toggle="modal" data-target="#editPwdModal"><span class="glyphicon glyphicon-edit"></span> 修改密码</a></li>
 						<li><a href="javascript:void(0);" data-toggle="modal" data-target="#exitModal"><span class="glyphicon glyphicon-off"></span> 退出</a></li>
 					</ul>
@@ -164,7 +188,7 @@
 				<li class="liClass"><a href="javascript:void(0);" target="workareaFrame"><span class="glyphicon glyphicon-time"></span> 审批</a></li>
 				<li class="liClass"><a href="javascript:void(0);" target="workareaFrame"><span class="glyphicon glyphicon-user"></span> 客户公海</a></li>
 				<li class="liClass"><a href="${pageContext.request.contextPath}/toView/activity/index" target="workareaFrame"><span class="glyphicon glyphicon-play-circle"></span> 市场活动</a></li>
-				<li class="liClass"><a href="clue/index.html" target="workareaFrame"><span class="glyphicon glyphicon-search"></span> 线索（潜在客户）</a></li>
+				<li class="liClass"><a href="${pageContext.request.contextPath}/toView/clue/index" target="workareaFrame"><span class="glyphicon glyphicon-search"></span> 线索（潜在客户）</a></li>
 				<li class="liClass"><a href="customer/index.html" target="workareaFrame"><span class="glyphicon glyphicon-user"></span> 客户</a></li>
 				<li class="liClass"><a href="contacts/index.html" target="workareaFrame"><span class="glyphicon glyphicon-earphone"></span> 联系人</a></li>
 				<li class="liClass"><a href="transaction/index.html" target="workareaFrame"><span class="glyphicon glyphicon-usd"></span> 交易（商机）</a></li>

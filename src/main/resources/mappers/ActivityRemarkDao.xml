@@ -46,6 +46,9 @@
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.bjpowernode.crm.workBench.bean.ActivityRemark" useGeneratedKeys="true">
     insert into tbl_activity_remark
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+            id,
+      </if>
       <if test="notecontent != null">
         noteContent,
       </if>
@@ -69,6 +72,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+    <if test="id!=null">
+      #{id,jdbcType=CHAR},
+    </if>
       <if test="notecontent != null">
         #{notecontent,jdbcType=VARCHAR},
       </if>

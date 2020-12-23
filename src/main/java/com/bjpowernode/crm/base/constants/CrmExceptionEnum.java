@@ -5,11 +5,15 @@ public enum  CrmExceptionEnum {
     LOGIN_EXPIRE_EXCEPTION("001","账户已失效！"),
     LOGIN_LOCK_EXCEPTION("001","账户被锁定，请联系管理员！"),
     LOGIN_IP_EXCEPTION("001","不允许的IP地址！"),
+    FILEUPLOAD_EXCEPTION("001","上传文件失败！"),
 
     ACTIVITY_CREATE("002","添加用户失败"),
     ACTIVITY_EDIT("002","修改用户失败"),
     ACTIVITY_delBach("002","删除用户失败"),
-    ACTIVITY_BEIZHUDELETE("002","删除备注失败");
+    ACTIVITY_BEIZHUDELETE("002","删除备注失败"),
+    ACTIVITY_EDITBEIZHU("002","修改备注失败"),
+    ACTIVITY_CREATEBEIZHU("002","添加备注失败");
+
 
     private String code;
     private String mess;

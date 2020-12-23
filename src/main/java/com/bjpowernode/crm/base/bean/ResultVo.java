@@ -6,7 +6,25 @@ public class ResultVo<T> {
     private boolean ok;
     private String mess;
 
+    T t;
 
+    @Override
+    public String   toString() {
+        return "ResultVo{" +
+                "ok=" + ok +
+                ", mess='" + mess + '\'' +
+                ", t=" + t +
+                ", pageInfo=" + pageInfo +
+                '}';
+    }
+
+    public T getT() {
+        return t;
+    }
+
+    public void setT(T t) {
+        this.t = t;
+    }
 
     public boolean isOk() {
         return ok;
@@ -30,13 +48,6 @@ public class ResultVo<T> {
     }
 
     private PageInfo<T> pageInfo;
-
-    @Override
-    public String toString() {
-        return "ResultVo{" +
-                "pageInfo=" + pageInfo +
-                '}';
-    }
 
     public PageInfo<T> getPageInfo() {
         return pageInfo;
