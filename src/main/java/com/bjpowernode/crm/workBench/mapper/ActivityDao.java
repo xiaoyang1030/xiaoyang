@@ -2,6 +2,7 @@ package com.bjpowernode.crm.workBench.mapper;
 
 import com.bjpowernode.crm.workBench.bean.Activity;
 import com.bjpowernode.crm.workBench.bean.ActivityQueryVo;
+import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
@@ -24,4 +25,10 @@ public interface ActivityDao   {
     int updateByPrimaryKeySelective(Activity record);
 
     int updateByPrimaryKey(Activity record);
+
+    List<Activity> selectByName(@Param("name")String name,@Param("clueid")String clueid);
+
+    List<Activity> selectByNameAndClueid(@Param("name")String name,@Param("clueid")String clueid);
+
+    List<Activity> selectByActivityName(@Param("name")String name);
 }

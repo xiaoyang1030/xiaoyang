@@ -38,25 +38,28 @@
     delete from tbl_clue
     where id = #{id,jdbcType=CHAR}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bjpowernode.crm.workBench.bean.Clue" useGeneratedKeys="true">
-    insert into tbl_clue (fullname, appellation, `owner`, 
-      company, job, email, 
+  <insert id="insert" parameterType="com.bjpowernode.crm.workBench.bean.Clue">
+    insert into tbl_clue (id, fullname, appellation, 
+      `owner`, company, job, email, 
       phone, website, mphone, 
       `state`, `source`, createBy, 
       createTime, editBy, editTime, 
       description, contactSummary, nextContactTime, 
       address)
-    values (#{fullname,jdbcType=VARCHAR}, #{appellation,jdbcType=VARCHAR}, #{owner,jdbcType=CHAR}, 
-      #{company,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=CHAR}, #{fullname,jdbcType=VARCHAR}, #{appellation,jdbcType=VARCHAR}, 
+      #{owner,jdbcType=CHAR}, #{company,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, #{mphone,jdbcType=VARCHAR}, 
       #{state,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, #{createby,jdbcType=VARCHAR}, 
       #{createtime,jdbcType=CHAR}, #{editby,jdbcType=VARCHAR}, #{edittime,jdbcType=CHAR}, 
       #{description,jdbcType=VARCHAR}, #{contactsummary,jdbcType=VARCHAR}, #{nextcontacttime,jdbcType=CHAR}, 
       #{address,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.bjpowernode.crm.workBench.bean.Clue" useGeneratedKeys="true">
+  <insert id="insertSelective" parameterType="com.bjpowernode.crm.workBench.bean.Clue">
     insert into tbl_clue
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="fullname != null">
         fullname,
       </if>
@@ -116,6 +119,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
       <if test="fullname != null">
         #{fullname,jdbcType=VARCHAR},
       </if>
@@ -261,4 +267,34 @@
       address = #{address,jdbcType=VARCHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
+
+  <select id="selectAll" parameterType="com.bjpowernode.crm.workBench.bean.ClueQueryVo" resultType="com.bjpowernode.crm.workBench.bean.Clue">
+    select * from tbl_clue a left join tbl_user u on a.owner=u.id
+    <where>
+      <if test="fullname!=null and fullname!=''">
+      and  a.fullname like concat('%',#{fullname},'%')
+      </if>
+      <if test="owner!=null and owner!=''">
+        and u.name like concat('%',#{owner},'%')
+      </if>
+      <if test="phone!=null and phone!=''">
+        and a.phone like concat('%',#{phone},'%')
+      </if>
+      <if test="mphone!=null and mphone!=''">
+        and a.mphone like concat('%',#{mphone},'%')
+      </if>
+      <if test="company!=null and company!=''">
+        and a.company like concat('%',#{company},'%')
+      </if>
+      <if test="source!=null and source!=''">
+        and a.source = #{source}
+      </if>
+      <if test="state!=null and state!=''">
+        and a.state  = #{state}
+      </if>
+    </where>
+  </select>
+
+
+
 </mapper>

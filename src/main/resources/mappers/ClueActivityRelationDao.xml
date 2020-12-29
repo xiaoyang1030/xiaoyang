@@ -10,7 +10,7 @@
     id, clueId, activityId
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from tbl_clue_activity_relation
     where id = #{id,jdbcType=CHAR}
@@ -19,13 +19,18 @@
     delete from tbl_clue_activity_relation
     where id = #{id,jdbcType=CHAR}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bjpowernode.crm.workBench.bean.ClueActivityRelation" useGeneratedKeys="true">
-    insert into tbl_clue_activity_relation (clueId, activityId)
-    values (#{clueid,jdbcType=CHAR}, #{activityid,jdbcType=CHAR})
+  <insert id="insert" parameterType="com.bjpowernode.crm.workBench.bean.ClueActivityRelation">
+    insert into tbl_clue_activity_relation (id, clueId, activityId
+      )
+    values (#{id,jdbcType=CHAR}, #{clueid,jdbcType=CHAR}, #{activityid,jdbcType=CHAR}
+      )
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.bjpowernode.crm.workBench.bean.ClueActivityRelation" useGeneratedKeys="true">
+  <insert id="insertSelective" parameterType="com.bjpowernode.crm.workBench.bean.ClueActivityRelation">
     insert into tbl_clue_activity_relation
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="clueid != null">
         clueId,
       </if>
@@ -34,6 +39,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
       <if test="clueid != null">
         #{clueid,jdbcType=CHAR},
       </if>
@@ -60,4 +68,34 @@
       activityId = #{activityid,jdbcType=CHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
+
+  <select id="queryList" resultType="com.bjpowernode.crm.workBench.bean.ClueActivityRelation">
+    select * from tbl_clue_activity_relation car left join tbl_clue c on car.clueId=c.id
+    left join tbl_activity a on car.activityId=a.id
+  </select>
+
+  <select id="queryByCLueId" resultType="string">
+    select activityId from tbl_clue_activity_relation
+    <where>
+        <if test="clueid!=null and clueid!=''">
+            clueid = #{clueid}
+        </if>
+    </where>
+  </select>
+
+  <select id="selectByCLueId" resultType="com.bjpowernode.crm.workBench.bean.ClueActivityRelation">
+    select * from tbl_clue_activity_relation
+    <where>
+      <if test="clueid!=null and clueid!=''">
+        clueid = #{clueid}
+      </if>
+    </where>
+  </select>
+
+<delete id="deleteByClueidAndActivityId">
+  delete  from tbl_clue_activity_relation
+  where clueId = #{clueid} and activityId=#{activityid}
+</delete>
+
+
 </mapper>

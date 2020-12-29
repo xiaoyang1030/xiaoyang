@@ -1,6 +1,7 @@
 package com.bjpowernode.crm.workBench.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * tbl_clue
@@ -46,6 +47,43 @@ public class Clue implements Serializable {
     private String nextcontacttime;
 
     private String address;
+
+    @Override
+    public String toString() {
+        return "Clue{" +
+                "id='" + id + '\'' +
+                ", fullname='" + fullname + '\'' +
+                ", appellation='" + appellation + '\'' +
+                ", owner='" + owner + '\'' +
+                ", company='" + company + '\'' +
+                ", job='" + job + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", website='" + website + '\'' +
+                ", mphone='" + mphone + '\'' +
+                ", state='" + state + '\'' +
+                ", source='" + source + '\'' +
+                ", createby='" + createby + '\'' +
+                ", createtime='" + createtime + '\'' +
+                ", editby='" + editby + '\'' +
+                ", edittime='" + edittime + '\'' +
+                ", description='" + description + '\'' +
+                ", contactsummary='" + contactsummary + '\'' +
+                ", nextcontacttime='" + nextcontacttime + '\'' +
+                ", address='" + address + '\'' +
+                ", clueRemarks=" + clueRemarks +
+                '}';
+    }
+
+    private List<ClueRemark> clueRemarks;
+
+    public List<ClueRemark> getClueRemarks() {
+        return clueRemarks;
+    }
+
+    public void setClueRemarks(List<ClueRemark> clueRemarks) {
+        this.clueRemarks = clueRemarks;
+    }
 
     private static final long serialVersionUID = 1L;
 

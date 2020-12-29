@@ -24,4 +24,10 @@ public interface ActivityService {
     void updateEditRemark(ActivityRemark activityRemark);
 
     ActivityRemark createEditRemark(ActivityRemark activityRemark);
+
+    List<Activity> selectByName(String name,String clueid);
+
+    List<Activity> selectByClueIdName(String name, String clueid);
+
+    List<Activity> selectActivityName(String name);
 }

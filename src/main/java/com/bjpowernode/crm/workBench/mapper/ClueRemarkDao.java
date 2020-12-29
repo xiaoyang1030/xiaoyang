@@ -1,17 +1,8 @@
 package com.bjpowernode.crm.workBench.mapper;
 
 import com.bjpowernode.crm.workBench.bean.ClueRemark;
+import tk.mybatis.mapper.common.Mapper;
 
-public interface ClueRemarkDao {
-    int deleteByPrimaryKey(String id);
+public interface ClueRemarkDao extends Mapper<ClueRemark> {
 
-    int insert(ClueRemark record);
-
-    int insertSelective(ClueRemark record);
-
-    ClueRemark selectByPrimaryKey(String id);
-
-    int updateByPrimaryKeySelective(ClueRemark record);
-
-    int updateByPrimaryKey(ClueRemark record);
 }

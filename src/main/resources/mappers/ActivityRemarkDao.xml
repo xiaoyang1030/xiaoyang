@@ -136,4 +136,6 @@
       activityId = #{activityid,jdbcType=CHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
+
+
 </mapper>

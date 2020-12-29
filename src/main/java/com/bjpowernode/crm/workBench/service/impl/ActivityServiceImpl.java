@@ -13,12 +13,15 @@ import com.bjpowernode.crm.workBench.bean.ActivityQueryVo;
 import com.bjpowernode.crm.workBench.bean.ActivityRemark;
 import com.bjpowernode.crm.workBench.mapper.ActivityDao;
 import com.bjpowernode.crm.workBench.mapper.ActivityRemarkDao;
+import com.bjpowernode.crm.workBench.mapper.ClueActivityRelationDao;
+import com.bjpowernode.crm.workBench.mapper.ClueDao;
 import com.bjpowernode.crm.workBench.service.ActivityService;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("service")
@@ -30,6 +33,10 @@ public class ActivityServiceImpl implements ActivityService {
     private UserDao userDao;
     @Autowired
     private ActivityRemarkDao activityRemarkDao;
+    @Autowired
+    private ClueDao clueDao;
+    @Autowired
+    private ClueActivityRelationDao activityRelationDao;
 
     @Override
     public List<Activity> queryAll(ActivityQueryVo activityQueryVo) {
@@ -105,6 +112,51 @@ public class ActivityServiceImpl implements ActivityService {
         } else {
             return activityRemark;
         }
+    }
+
+    //查询所有未关联的市场活动
+    @Override
+    public List<Activity> selectByName(String name,String clueid) {
+
+        List<Activity> activities=activityDao.selectByName(name,clueid);
+        for (Activity activity : activities) {
+            List<User> users = userDao.selectAll();
+            for (User user : users) {
+                if(activity.getOwner().equals(user.getId())){
+                    activity.setOwner(user.getName());
+                }
+            }
+        }
+        return activities;
+    }
+
+    //查询所有已经关联的市场活动
+    @Override
+    public List<Activity> selectByClueIdName(String name, String clueid) {
+        List<Activity> activities=activityDao.selectByNameAndClueid(name,clueid);
+        for (Activity activity : activities) {
+            List<User> users = userDao.selectAll();
+            for (User user : users) {
+                if(activity.getOwner().equals(user.getId())){
+                    activity.setOwner(user.getName());
+                }
+            }
+        }
+        return activities;
+    }
+
+    @Override
+    public List<Activity> selectActivityName(String name) {
+        List<Activity> activities=activityDao.selectByActivityName(name);
+        for (Activity activity : activities) {
+            List<User> users = userDao.selectAll();
+            for (User user : users) {
+                if(activity.getOwner().equals(user.getId())){
+                    activity.setOwner(user.getName());
+                }
+            }
+        }
+        return activities;
     }
 
     @Override

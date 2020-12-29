@@ -13,6 +13,26 @@ public class ClueActivityRelation implements Serializable {
 
     private String activityid;
 
+    private Clue clue;
+
+    private Activity activity;
+
+    public Clue getClue() {
+        return clue;
+    }
+
+    public void setClue(Clue clue) {
+        this.clue = clue;
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public String getId() {

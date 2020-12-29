@@ -2,11 +2,23 @@ package com.bjpowernode.crm.base.bean;
 
 import com.github.pagehelper.PageInfo;
 
+import java.util.List;
+
 public class ResultVo<T> {
     private boolean ok;
     private String mess;
 
     T t;
+
+    List<T> list;
+
+    public List<T> getList() {
+        return list;
+    }
+
+    public void setList(List<T> list) {
+        this.list = list;
+    }
 
     @Override
     public String   toString() {

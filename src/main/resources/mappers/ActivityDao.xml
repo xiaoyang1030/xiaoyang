@@ -2,17 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bjpowernode.crm.workBench.mapper.ActivityDao">
     <resultMap id="BaseResultMap" type="com.bjpowernode.crm.workBench.bean.Activity">
-        <id column="id" jdbcType="CHAR" property="id" />
-        <result column="owner" jdbcType="CHAR" property="owner" />
-        <result column="name" jdbcType="VARCHAR" property="name" />
-        <result column="startDate" jdbcType="CHAR" property="startDate" />
-        <result column="endDate" jdbcType="CHAR" property="endDate" />
-        <result column="cost" jdbcType="VARCHAR" property="cost" />
-        <result column="description" jdbcType="VARCHAR" property="description" />
-        <result column="createTime" jdbcType="CHAR" property="createTime" />
-        <result column="createBy" jdbcType="VARCHAR" property="createBy" />
-        <result column="editTime" jdbcType="CHAR" property="editTime" />
-        <result column="editBy" jdbcType="VARCHAR" property="editBy" />
+        <id column="id" jdbcType="CHAR" property="id"/>
+        <result column="owner" jdbcType="CHAR" property="owner"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="startDate" jdbcType="CHAR" property="startDate"/>
+        <result column="endDate" jdbcType="CHAR" property="endDate"/>
+        <result column="cost" jdbcType="VARCHAR" property="cost"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="createTime" jdbcType="CHAR" property="createTime"/>
+        <result column="createBy" jdbcType="VARCHAR" property="createBy"/>
+        <result column="editTime" jdbcType="CHAR" property="editTime"/>
+        <result column="editBy" jdbcType="VARCHAR" property="editBy"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, `owner`, `name`, startDate, endDate, cost, description, createTime, createBy,
@@ -50,7 +50,7 @@
 
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from tbl_activity
         where id = #{id,jdbcType=CHAR}
     </select>
@@ -58,7 +58,8 @@
     delete from tbl_activity
     where id = #{id,jdbcType=CHAR}
   </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bjpowernode.crm.workBench.bean.Activity" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bjpowernode.crm.workBench.bean.Activity"
+            useGeneratedKeys="true">
     insert into tbl_activity (`owner`, `name`, startDate,
       endDate, cost, description,
       createTime, createBy, editTime,
@@ -68,7 +69,8 @@
       #{createTime,jdbcType=CHAR}, #{createBy,jdbcType=VARCHAR}, #{editTime,jdbcType=CHAR},
       #{editBy,jdbcType=VARCHAR})
   </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.bjpowernode.crm.workBench.bean.Activity" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.bjpowernode.crm.workBench.bean.Activity" useGeneratedKeys="true">
         insert into tbl_activity
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="owner != null">
@@ -185,4 +187,46 @@
       editBy = #{editBy,jdbcType=VARCHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
+
+    <select id="selectByName" resultType="com.bjpowernode.crm.workBench.bean.Activity">
+        select
+        e.id, u.name as owner, e.name, e.startDate, e.endDate, e.cost, e.description, e.createTime, e.createBy,
+        e.editTime, e.editBy
+        from tbl_activity e join tbl_user u on e.owner=u.id
+        <where>
+            <if test="name !=null and name !=''">
+                and   e.name like concat('%',#{name},'%')
+            </if>
+            <if test="clueid !=null and clueid !=''">
+                and e.id not in( select activityId from tbl_clue_activity_relation where clueId =#{clueid})
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByNameAndClueid" resultType="com.bjpowernode.crm.workBench.bean.Activity">
+        select
+        e.id, u.name as owner, e.name, e.startDate, e.endDate, e.cost, e.description, e.createTime, e.createBy,
+        e.editTime, e.editBy
+        from tbl_activity e join tbl_user u on e.owner=u.id
+        <where>
+            <if test="name !=null and name !=''">
+                and   e.name like concat('%',#{name},'%')
+            </if>
+            <if test="clueid !=null and clueid !=''">
+                and e.id in( select activityId from tbl_clue_activity_relation where clueId =#{clueid})
+            </if>
+        </where>
+    </select>
+    <select id="selectByActivityName" resultType="com.bjpowernode.crm.workBench.bean.Activity">
+        select
+        e.id, u.name as owner, e.name, e.startDate, e.endDate, e.cost, e.description, e.createTime, e.createBy,
+        e.editTime, e.editBy
+        from tbl_activity e join tbl_user u on e.owner=u.id
+        <where>
+            <if test="name !=null and name !=''">
+                and   e.name like concat('%',#{name},'%')
+            </if>
+        </where>
+    </select>
+
 </mapper>

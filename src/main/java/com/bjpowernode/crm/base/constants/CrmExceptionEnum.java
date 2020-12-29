@@ -12,7 +12,15 @@ public enum  CrmExceptionEnum {
     ACTIVITY_delBach("002","删除用户失败"),
     ACTIVITY_BEIZHUDELETE("002","删除备注失败"),
     ACTIVITY_EDITBEIZHU("002","修改备注失败"),
-    ACTIVITY_CREATEBEIZHU("002","添加备注失败");
+    ACTIVITY_CREATEBEIZHU("002","添加备注失败"),
+
+    CLUE_CREATE("003","添加线索失败"),
+    CLUE_UNBIND("003","线索和市场活动解绑失败"),
+    CLUE_BIND("003","关联市场活动失败"),
+    CLUE_TRANSFER("003","转换失败"),
+
+    CREATE_TRANACTION("004","创建交易失败");
+
 
 
     private String code;

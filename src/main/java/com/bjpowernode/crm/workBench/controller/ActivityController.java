@@ -146,8 +146,39 @@ public class ActivityController {
             resultVo = new ResultVo(true, e.getMessage());
         }
         return resultVo;
-
     }
+
+    //查询所有未关联的市场活动
+    @RequestMapping("clue/seacrhactivity")
+    @ResponseBody
+    public ResultVo<Activity>  seacrhactivity(String name,String clueid){
+        ResultVo resultVo=new ResultVo();
+        List<Activity> activities=activityService.selectByName(name,clueid);
+        resultVo.setList(activities);
+        return resultVo;
+    }
+
+    //查询已经关联的市场活动
+    @RequestMapping("clue/seacrhBindActivity")
+    @ResponseBody
+    public ResultVo<Activity>  seacrhBindActivity(String name,String clueid){
+        ResultVo resultVo=new ResultVo();
+        List<Activity> activities=activityService.selectByClueIdName(name,clueid);
+        resultVo.setList(activities);
+        return resultVo;
+    }
+
+    //查询所有的市场活动
+    @RequestMapping("clue/searchAllActivity")
+    @ResponseBody
+    public ResultVo<Activity>  searchAllActivity(String name){
+        ResultVo resultVo=new ResultVo();
+        List<Activity> activities=activityService.selectActivityName(name);
+        resultVo.setList(activities);
+        return resultVo;
+    }
+
+
 
 
 }

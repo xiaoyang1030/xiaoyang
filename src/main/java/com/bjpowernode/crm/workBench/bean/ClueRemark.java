@@ -1,12 +1,20 @@
 package com.bjpowernode.crm.workBench.bean;
 
+import tk.mybatis.mapper.annotation.NameStyle;
+import tk.mybatis.mapper.code.Style;
+
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
  * tbl_clue_remark
  * @author 
  */
+@Table(name = "tbl_clue_remark")
+@NameStyle(Style.normal)
 public class ClueRemark implements Serializable {
+    @Id
     private String id;
 
     private String notecontent;

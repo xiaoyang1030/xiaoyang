@@ -424,10 +424,10 @@
     }
 
 
-    //点击查询按钮，查询数据
-    $('#activityQueryBtn').click(function () {
-        refresh(1, 3);
-    });
+        //点击查询按钮，查询数据
+        $('#activityQueryBtn').click(function () {
+            refresh(1, 3);
+        });
 
     //第一次进入到列表页面，要查询第一页数据
     refresh(1, 3);
